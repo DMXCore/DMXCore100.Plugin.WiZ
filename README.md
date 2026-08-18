@@ -104,9 +104,10 @@ d                                         # dump registered protocols / profiles
 ```
 
 Every push to `main` builds, tests, and packs. Publishing to nuget.org
-(the plugin registry the devices install from) is armed by the `NUGET_USER`
-repository variable plus a nuget.org trusted-publishing policy for this
-repo; bumping `<Version>` in the csproj is what publishes once armed.
+(the plugin registry the devices install from) is armed by setting the
+`PUBLISH_TO_NUGET` repository variable to `true` (plus a nuget.org
+trusted-publishing policy for this repo); bumping `<Version>` in the csproj
+is what publishes once armed.
 
 ## License
 
