@@ -69,6 +69,12 @@ protocol, smooth 10 Hz fades through the low end, and kelvin-mode whites.
 - **Color protocol shows no lights but Discover finds them:** the module
   reported a non-color `moduleName` (`…TW…` tunable white, `…DW…`
   dimmable). Use a White protocol for it.
+- **Color changes crossfade instead of snapping:** that is the WiZ
+  firmware — every `setPilot` is smoothed over a fraction of a second, and
+  power on/off gets a ~1 s fade; the app's Fade in / Fade out setting only
+  affects on/off, not color-to-color, and the protocol has no per-command
+  transition time. Fades and effects look smooth as a result, but hard
+  snaps and blackouts land slightly late.
 - **Wrong light:** destination is the IP address. Re-run Discover after a
   DHCP change, or set a static lease.
 - **Plugin will not load:** the device firmware must expose SDK 1.6+.
