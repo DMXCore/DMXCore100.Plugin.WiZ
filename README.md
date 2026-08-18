@@ -42,20 +42,19 @@ latest-wins. Every update is one `setPilot` datagram; all channels at zero
 sends `state: false` (light off).
 
 **Brightness:** WiZ renders `r,g,b,c,w` as the color and a separate
-`dimming` percentage as brightness, and the firmware rejects `dimming`
-below 10 % (`Invalid params`; verified on an ESP25_SHRGB_01 A19 running
-1.31.37). The plugin therefore puts the level of the brightest channel
+`dimming` percentage as brightness, and older firmware rejects `dimming`
+below 10 % (`Invalid params` on 1.31.37; 1.38.0 accepts down to 1 %). The plugin therefore puts the level of the brightest channel
 into `dimming` and normalizes the color channels toward 255 (best color
 resolution), and below 10 % keeps `dimming` at 10 and scales the color
 channels down instead, so fades continue smoothly to black rather than
-stepping. Kelvin-mode protocols (`WIZ_WHITE_CT`, `WIZ_WHITE`) have no
-channel to scale and floor at 10 %.
+stepping — on every firmware. Kelvin-mode protocols (`WIZ_WHITE_CT`,
+`WIZ_WHITE`) have no channel to scale and floor at 10 %.
 
 Requires a Core whose plugin SDK contract is **1.6** or newer.
 
 Verified on hardware with a WiZ 60 W A19 Full Color (Matter generation,
-module `ESP25_SHRGB_01`, firmware 1.31.37): discovery, every protocol,
-smooth 10 Hz fades through the low end, and kelvin-mode whites.
+module `ESP25_SHRGB_01`, firmware 1.31.37 and 1.38.0): discovery, every
+protocol, smooth 10 Hz fades through the low end, and kelvin-mode whites.
 
 ## Troubleshooting
 

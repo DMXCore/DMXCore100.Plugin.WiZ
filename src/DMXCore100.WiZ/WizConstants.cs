@@ -15,10 +15,12 @@ internal static class WizConstants
     public const int MaxUpdatesPerSecond = 10;
 
     /// <summary>
-    /// Lowest <c>dimming</c> WiZ firmware accepts: an ESP25_SHRGB_01 on
-    /// 1.31.37 answers "Invalid params" to anything below 10. Levels below
-    /// this are rendered by scaling the color channels instead, so the plugin
-    /// never sends a value the bulb rejects.
+    /// Lowest <c>dimming</c> the plugin sends. Firmware-dependent on the
+    /// bulb side: an ESP25_SHRGB_01 on 1.31.37 answers "Invalid params" to
+    /// anything below 10, while 1.38.0 accepts down to 1. Staying at 10 works
+    /// everywhere; levels below it are rendered by scaling the color channels
+    /// instead (visually lossless on the color protocols), so the plugin
+    /// never sends a value an older bulb rejects.
     /// </summary>
     public const int MinDimming = 10;
 
