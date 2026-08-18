@@ -42,13 +42,8 @@ jobs:
       # A package pushed to nuget.org can never be deleted, so refuse a
       # package that lacks the plugin payload (built with an SDK that
       # predates registry packaging, or a broken pack) BEFORE logging in.
-      #
-      # Publishing is armed by the PUBLISH_TO_NUGET repository variable
-      # (set it to 'true' once the plugin is hardware-verified and the
-      # trusted-publishing policy for this repo exists on nuget.org). Until
-      # then pushes to main build, test and pack but publish nothing.
       - name: Verify plugin package
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.PUBLISH_TO_NUGET == 'true'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           pkg=$(ls artifacts/*.nupkg | head -1)
           if ! unzip -l "$pkg" | grep -q 'content/plugin.dmxplugin'; then
@@ -61,14 +56,14 @@ jobs:
       # registered on nuget.org for this repo + workflow file. NUGET_USER (repo
       # or org Actions variable) is the nuget.org profile name that owns the policy.
       - name: NuGet login (OIDC)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.PUBLISH_TO_NUGET == 'true'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         id: nuget-login
         uses: NuGet/login@v1
         with:
           user: ${{ vars.NUGET_USER }}
 
       - name: Publish to nuget.org
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.PUBLISH_TO_NUGET == 'true'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           dotnet nuget push artifacts/*.nupkg \
             --source https://api.nuget.org/v3/index.json \

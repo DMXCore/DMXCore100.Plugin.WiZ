@@ -103,11 +103,10 @@ r                                         # shutdown + initialize again
 d                                         # dump registered protocols / profiles
 ```
 
-Every push to `main` builds, tests, and packs. Publishing to nuget.org
-(the plugin registry the devices install from) is armed by setting the
-`PUBLISH_TO_NUGET` repository variable to `true` (plus a nuget.org
-trusted-publishing policy for this repo); bumping `<Version>` in the csproj
-is what publishes once armed.
+Every push to `main` builds, tests, packs, and publishes the package to
+nuget.org (the plugin registry the devices install from) via trusted
+publishing; bumping `<Version>` in the csproj is what publishes a new
+release.
 
 ## License
 
