@@ -7,7 +7,7 @@
     <!-- The SDK generates manifest.json and PluginBuildInfo from these -->
     <PluginId>wiz</PluginId>
     <PluginDisplayName>WiZ</PluginDisplayName>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>DMX Core</Authors>
 
     <!-- Plugin registry (nuget.org) package metadata. DMXCore.Plugin.* is the
@@ -15,7 +15,9 @@
          via the DMXCore.PluginSdk pack targets. -->
     <PackageId>DMXCore.Plugin.WiZ</PackageId>
     <Description>WiZ output for the DMX Core 100 lighting controller: drives WiZ (Signify) WiFi color and tunable-white bulbs from DMX channel data over the WiZ local UDP protocol, no cloud account required.</Description>
-    <PackageProjectUrl>https://docs.dmxcore.com/dmx-core-100</PackageProjectUrl>
+    <PackageProjectUrl>https://docs.dmxcore.com/dmx-core-100/integrations/wiz</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DMXCore/DMXCore100.Plugin.WiZ</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <!-- Embedded icon (not iconUrl) is a nuget.org reserved-prefix review
