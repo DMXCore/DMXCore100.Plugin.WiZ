@@ -108,6 +108,7 @@ public class WizPlugin : IPlugin
             PortType = PortType,
             PortTypeDisplayName = "WiZ",
             MaxUpdatesPerSecond = WizConstants.MaxUpdatesPerSecond,
+            RefreshInterval = TimeSpan.FromMilliseconds(WizConstants.RefreshIntervalMs),
             SupportsDestinationDiscovery = true,
             SuggestedProfileCode = mode.ProfileCode,
             SuggestedPersonality = mode.Personality,

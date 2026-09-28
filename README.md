@@ -39,7 +39,9 @@ through the normal lighting pipeline.
 
 The Core rate-limits each mapping to 10 updates/second and coalesces
 latest-wins. Every update is one `setPilot` datagram; all channels at zero
-sends `state: false` (light off).
+sends `state: false` (light off). While a look holds still, the Core
+re-sends it every 2 seconds, so a light changed from the WiZ app or a
+scene returns to the Core's state (on or off included).
 
 **Brightness:** WiZ renders `r,g,b,c,w` as the color and a separate
 `dimming` percentage as brightness, and older firmware rejects `dimming`
@@ -50,7 +52,8 @@ channels down instead, so fades continue smoothly to black rather than
 stepping — on every firmware. Kelvin-mode protocols (`WIZ_WHITE_CT`,
 `WIZ_WHITE`) have no channel to scale and floor at 10 %.
 
-Requires a Core whose plugin SDK contract is **1.6** or newer.
+Requires a Core whose plugin SDK contract is **1.13** or newer (the idle
+re-send). Older Cores stay on plugin 1.0.1.
 
 Verified on hardware with a WiZ 60 W A19 Full Color (Matter generation,
 module `ESP25_SHRGB_01`, firmware 1.31.37 and 1.38.0): discovery, every
@@ -77,7 +80,7 @@ protocol, smooth 10 Hz fades through the low end, and kelvin-mode whites.
   snaps and blackouts land slightly late.
 - **Wrong light:** destination is the IP address. Re-run Discover after a
   DHCP change, or set a static lease.
-- **Plugin will not load:** the device firmware must expose SDK 1.6+.
+- **Plugin will not load:** the device firmware must expose SDK 1.13+.
 
 ## Development
 
@@ -90,7 +93,7 @@ dotnet test tests/DMXCore100.WiZ.Tests
 pwsh ./deploy-dev.ps1     # pack and upload to localhost:8080 (prompts for PIN)
 ```
 
-The SDK is restored from nuget.org (`DMXCore.PluginSdk` 1.*). To build
+The SDK is restored from nuget.org (`DMXCore.PluginSdk` 1.13.*). To build
 against an unpublished SDK, pack `src/PluginSdk` and `src/PluginSdk.Testing`
 from the Software repo into `local-feed/` (see the comment in
 `nuget.config`); the `.nupkg` files are git-ignored.

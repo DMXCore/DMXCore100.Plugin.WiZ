@@ -15,6 +15,14 @@ internal static class WizConstants
     public const int MaxUpdatesPerSecond = 10;
 
     /// <summary>
+    /// Every protocol declares this as its RefreshInterval (SDK contract
+    /// 1.13): while a look holds still the host re-delivers it this often,
+    /// and each delivery is a full <c>setPilot</c> (state plus color), so a
+    /// bulb changed from the WiZ app or a scene returns to the Core's state.
+    /// </summary>
+    public const int RefreshIntervalMs = 2000;
+
+    /// <summary>
     /// Lowest <c>dimming</c> the plugin sends. Firmware-dependent on the
     /// bulb side: an ESP25_SHRGB_01 on 1.31.37 answers "Invalid params" to
     /// anything below 10, while 1.38.0 accepts down to 1. Staying at 10 works
